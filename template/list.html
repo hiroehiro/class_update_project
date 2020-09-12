@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block header %}
+<div class="jumbotron jumbotron-fluid">
+    <div class="container">
+      <h1 class="display-4">ealps更新チェック</h1>
+      <p class="lead">IDとPASSWORDを入力してealpsに更新があるかチェックします</p>
+    </div>
+  </div>
+{% endblock %}
+
+{% block content %}
+<div class='container'>
+  <a href="{% url 'create' %}" class="btn btn-info" tabindex="-1" role="button" aria-disabled="true">name,password入力</a>
+{% endblock content %}
+
+{% block content2 %}
+{% for item in object_list %}
+  <a href="{% url 'detail' item.pk %}" class="btn btn-success" tabindex="-1" role="button" aria-disabled="true">詳細</a>
+  
+{% endfor %}
+{% endblock content2 %}
