@@ -11,12 +11,12 @@
 
 {% block content %}
 <div class='container'>
-  <a href="{% url 'create' %}" class="btn btn-info" tabindex="-1" role="button" aria-disabled="true">name,password入力</a>
+  <a href="{% url 'create'%}" class="btn btn-info" tabindex="-1" role="button" aria-disabled="true">user入力</a>
 {% endblock content %}
 
 {% block content2 %}
 {% for item in object_list %}
-  <a href="{% url 'detail' item.pk %}" class="btn btn-success" tabindex="-1" role="button" aria-disabled="true">詳細</a>
+  <a href="{% url 'detail' item.pk %}" class="btn btn-success" tabindex="-1" role="button" aria-disabled="true">更新履歴{{ item.pk }}</a>
   
 {% endfor %}
 {% endblock content2 %}
