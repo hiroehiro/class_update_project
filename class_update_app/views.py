@@ -1,4 +1,4 @@
-from django.views.generic import ListView,CreateView,DetailView
+from django.views.generic import ListView,CreateView,DetailView,DeleteView
 from .models import ClassModel
 from django.urls import reverse_lazy
 import requests
@@ -62,5 +62,9 @@ def resultfunc(request,pk):
 
     
 
+class ClassDelete(DeleteView):
+    template_name="delete.html"
+    model=ClassModel
+    success_url=reverse_lazy("list")
 
 

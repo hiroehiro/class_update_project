@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block header %}
+<div class="jumbotron jumbotron-fluid">
+    <div class="container">
+      <h1 class="display-4">最新の更新履歴は削除しないように！</h1>
+    </div>
+  </div>
+{% endblock header %}
+{% block content %}
+<form action="" method="POST">{% csrf_token %}
+    <input type="submit" value="削除します">
+</form>
+{% endblock content %}
