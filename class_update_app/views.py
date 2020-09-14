@@ -37,24 +37,27 @@ def resultfunc(request,pk):
     res.raise_for_status()
     soup=BeautifulSoup(res.text,"html.parser")
     course_list=soup.find_all(class_="coursename")
-    post.classname=""
-    post.url=""
-    post.content=""
+    post.classname=[]
+    post.url=[]
+    post.content=[]
     for course in course_list[::-1]:
         course_name=str(course.find(class_=""))
-        post.classname=post.classname+" , "+course_name[82:113]
-        post.save()
-
+        
         url=re.findall("https.*?>",course_name)[0][:-2]
-        post.url=post.url+" , "+url
-        post.save()
-
+        
         res = session.get(url)
         res.raise_for_status()
         soup=BeautifulSoup(res.text,"html.parser")
         course_content=soup.find(class_="course-content")
         course_content=course_content.get_text()
-        post.content=post.content+" , "+course_content
+
+        course_name=course_name.replace(",","")
+        url=url.replace(",","")
+        post.classname.append(course_name[82:113])
+        post.classname.append(url)
+
+        course_content=course_content.replace(",","")
+        post.content.append(course_content)
         post.save()
     
 

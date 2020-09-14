@@ -12,9 +12,12 @@
 {% block content %}
 <div class='container'>
   <div class="alert alert-success" role="alert">
-    <p>名前:{{ object.name }}
-    <p>授業名:{{ object.classname }}</p>
-    <p>URL:{{ object.url }}</p>
+    <p>名前:{{ object.name }}</p>
+    <p>授業名:{% for item in object.classname %}
+      <p>{{item}}</p>
+      {% endfor %}
+    </p>
+
     <p>時間:{{object.date}}</p>
     <a href="{% url 'result' object.pk %}" class="btn btn-primary btn active" role="button" aria-pressed="true">更新</a>
   </div>
