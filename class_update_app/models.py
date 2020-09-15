@@ -6,6 +6,7 @@ from django_mysql.models import ListTextField
 # Create your models here.
 class ClassModel(Model):
     classname=ListTextField(base_field=CharField(max_length=100),size=100,null=True)
+    diffclassname=ListTextField(base_field=CharField(max_length=100),size=100,null=True)
     content=ListTextField(base_field=CharField(max_length=100),size=100,null=True)
     url=ListTextField(base_field=CharField(max_length=100),size=100,null=True)
     name=CharField(max_length=100,null=True)

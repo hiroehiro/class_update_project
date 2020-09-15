@@ -60,7 +60,6 @@ def resultfunc(request,pk):
         post.content.append(course_content)
         post.save()
     
-
     return redirect("detail",pk=pk)
 
     
@@ -69,5 +68,23 @@ class ClassDelete(DeleteView):
     template_name="delete.html"
     model=ClassModel
     success_url=reverse_lazy("list")
+
+
+def comparefunc(request,pk):
+    post=ClassModel.objects.get(pk=pk)
+    prepost=ClassModel.objects.get(pk=pk-1)
+    post.diffclassname=[]
+    for i,name in enumerate(post.content):
+        try:
+            if name!=prepost.content[i]:
+                post.diffclassname.append(post.content[i])
+        except:
+            post.diffclassname.append(post.content[i])
+    
+    if len(post.diffclassname)==0:
+        post.diffclassname.append("更新されたページはありません")
+    
+    post.save()
+    return redirect("detail",pk=pk)
 
 

@@ -19,7 +19,12 @@
     </p>
 
     <p>時間:{{object.date}}</p>
-    <a href="{% url 'result' object.pk %}" class="btn btn-primary btn active" role="button" aria-pressed="true">更新</a>
+    <a href="{% url 'result' object.pk %}" class="btn btn-primary btn active" role="button" aria-pressed="true">授業表示</a>
+    <a href="{% url 'compare' object.pk %}" class="btn btn-danger btn active" role="button" aria-pressed="true">更新確認</a>
+    <p>更新された授業ページ:{% for item in object.diffclassname %}
+      <p>{{item}}</p>
+      {% endfor %}
+    </p>
   </div>
 </div>
 {% endblock content %}
