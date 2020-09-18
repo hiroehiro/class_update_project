@@ -5,6 +5,8 @@ import requests
 from bs4 import BeautifulSoup
 import re
 from django.shortcuts import redirect
+from django.shortcuts import render
+
 # Create your views here.
 
 class ClassList(ListView):
@@ -79,11 +81,24 @@ def comparefunc(request,pk):
     post.oldcontent=[]
     post.newcontent=[]
 
-    post.oldcontent,post.newcontent,diffclassname=mayer_ses(post.content,prepost.content)
-
+    post.oldcontent,post.newcontent=mayer_ses(post.content,prepost.content)
     
+    sumcontent={}
+    for i in range(max(len(post.oldcontent),len(post.newcontent))):
+        if len(post.oldcontent)>=len(post.newcontent) and i>=len(post.newcontent):
+            sumcontent[post.oldcontent[i]]="  "
+        elif len(post.newcontent)>=len(post.oldcontent) and i>=len(post.oldcontent):
+            sumcontent["  "]=post.newcontent
+        else:
+            sumcontent[post.oldcontent[i]]=post.newcontent[i]
+
+
     post.save()
-    return redirect("detail",pk=pk)
+    return render(request,"detail.html",{"object":post,"sumcontent":sumcontent})
+
+
+
+
 
 
 
@@ -145,19 +160,16 @@ def mayer_ses(a,b):
     actions=meyer(a,b)
     a_index=0
     b_index=0
-    diffclass=False
     for action in actions:
         if action==0:
-            a_ses.append("*"+a[a_index])
-            b_ses.append("*"+b[b_index])
+            a_ses.append(a[a_index])
+            b_ses.append(b[b_index])
             a_index+=1
             b_index+=1
         elif action==1:
             b_ses.append("+"+b[b_index])
             b_index+=1
-            diffclass=True
         else:
             a_ses.append("-"+a[a_index])
             a_index+=1
-            diffclass=True
-    return a_ses,b_ses,diffclass
+    return a_ses,b_ses,

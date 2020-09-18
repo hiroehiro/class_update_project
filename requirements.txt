@@ -4,3 +4,4 @@ Pillow
 requests
 beautifulsoup4
 django_mysql
+django_boost
