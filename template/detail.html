@@ -1,5 +1,9 @@
 {% extends 'base.html' %}
 
+{% block customcss %}
+{% endblock customcss %}
+
+
 {% block header %}
 <div class="jumbotron jumbotron-fluid">
     <div class="container">
@@ -21,10 +25,24 @@
     <p>時間:{{object.date}}</p>
     <a href="{% url 'result' object.pk %}" class="btn btn-primary btn active" role="button" aria-pressed="true">授業表示</a>
     <a href="{% url 'compare' object.pk %}" class="btn btn-danger btn active" role="button" aria-pressed="true">更新確認</a>
-    <p>更新された授業ページ:{% for item in object.diffclassname %}
-      <p>{{item}}</p>
-      {% endfor %}
-    </p>
   </div>
 </div>
 {% endblock content %}
+
+{% block content2 %}
+<div class='container'>
+  <div class="alert alert-success" role="alert">
+    <p>過去の授業ページ:{% for item in object.oldcontent %}
+      <p>{{item}}</p>
+      {% endfor %}
+    </p>
+    
+    
+    <p>更新された授業ページ:{% for item in object.newcontent %}
+      <p>{{item}}</p>
+      {% endfor %}
+    </p>
+    
+  </div>
+</div>
+{% endblock content2 %}
